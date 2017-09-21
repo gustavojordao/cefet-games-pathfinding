@@ -102,18 +102,32 @@ public class Agent {
 
         path.clear();
         pathFinder.metrics.reset();
+        
+        // Dijkstra
         // AQUI ESTAMOS CHAMANDO O ALGORITMO A* (instância pathFinder) 
         pathFinder.searchConnectionPath(startNode, targetNode, 
                 new Heuristic<TileNode>() { 
  
             @Override 
             public float estimate(TileNode n, TileNode n1) { 
-                throw new UnsupportedOperationException("Deveria ter retornado "
-                        + "um valor para a heurística no arquivo "
-                        + "Agent.java:107, mas o professor resolveu explodir "
-                        + "o programa e deixar você consertar ;)"); 
+                return 0.0f;
             } 
         }, path); 
+        
+/*
+    // Euclidiana
+    pathFinder.searchConnectionPath(startNode, targetNode, 
+                new Heuristic<TileNode>() { 
+ 
+            @Override 
+            public float estimate(TileNode n, TileNode n1) { 
+                Vector2 v = new Vector2(n.getPosition().x/LevelManager.tileWidth, n.getPosition().y/LevelManager.tileHeight);
+                Vector2 v1 = new Vector2(n1.getPosition().x/LevelManager.tileWidth, n1.getPosition().y/LevelManager.tileHeight);
+                
+                return v.dst(v1);
+            } 
+        }, path); 
+*/
         pathIterator = path.iterator();
     }
 
